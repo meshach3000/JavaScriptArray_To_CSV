@@ -1,0 +1,43 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+        <title>Writing Data to CSV</title>
+        <script type="text/javascript">
+            function addToCSVFile() {
+                var csvData = new Array();  // To collect the names
+                var csvFilePath = "D:\Data.csv"; // File name
+
+                // Collecting the names
+                csvData[0] = document.getElementById('firstName').value;
+                csvData[1] = document.getElementById('middleName').value;
+                csvData[2] = document.getElementById('lastName').value;
+
+                var fso = new ActiveXObject('Scripting.FileSystemObject');
+                var oStream = fso.OpenTextFile(csvFilePath, 8, true, 0);
+                oStream.WriteLine(csvData.join('|'));
+                oStream.Close();
+                clearData();
+				
+				
+                alert("Data Added Successfully");
+            }
+
+            function clearData() {
+                document.getElementById('firstName').value = "";
+                document.getElementById('middleName').value = "";
+                document.getElementById('lastName').value = "";
+            }
+        </script>
+    </head>
+    <body>
+        <p>
+            ITem Name: <input type="text" id="firstName" />
+            <br />
+            Item Code Name: <input type="text" id="middleName" />
+            <br />
+            Item Bar code Name: <input type="text" id="lastName" />
+            <br />
+            <input type="button" id="addButton" value="Add to CSV File" onClick="javascript: addToCSVFile()" />
+        </p>
+    </body>
+</html>
